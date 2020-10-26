@@ -6,9 +6,29 @@
 
 namespace Metal
 {
+	enum TokenType {
+		METAL_OPERATOR,
+		METAL_KEYWORD,
+		METAL_IDENTIFIER,
+
+		METAL_NONE
+	};
+
 	class Token
 	{
-		//
+		private:
+			TokenType token_type;
+			char ch;
+			std::string text;
+			int line_number;
+			int column_number;
+			friend class Metal;
+
+		public:
+			Token (TokenType token_type);
+			~Token ();
+			void print ();
+			bool isNoneType ();
 	};
 
 	class Metal
