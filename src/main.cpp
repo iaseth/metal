@@ -5,7 +5,7 @@
 int
 main (int argc, char const *argv[])
 {
-	Metal::Metal m{"example"};
-	m.print();
+	Metal::Metal m{"this is just some text"};
+	m.print_tokens();
 	return 0;
 }
