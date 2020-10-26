@@ -5,6 +5,7 @@
 int
 main (int argc, char const *argv[])
 {
-	std::cout << "Hello, Metal!\n";
+	Metal::Metal m{"example"};
+	m.print();
 	return 0;
 }
