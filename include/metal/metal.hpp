@@ -1,0 +1,6 @@
+#ifndef METAL_HPP_IS_INCLUDED
+#define METAL_HPP_IS_INCLUDED
+
+
+
+#endif
