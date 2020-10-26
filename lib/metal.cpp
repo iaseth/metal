@@ -20,7 +20,8 @@ namespace Metal
 		//
 	}
 
-	void Token::print ()
+	void
+	Token::print ()
 	{
 		std::cout << "(" << this->line_number << ", " << this->column_number << ") ";
 
@@ -31,7 +32,8 @@ namespace Metal
 		}
 	}
 
-	bool Token::isNoneType ()
+	bool
+	Token::isNoneType ()
 	{
 		if (this->token_type == TokenType::METAL_NONE) {
 			return true;
@@ -70,7 +72,7 @@ namespace Metal
 
 			if (!current_token->isNoneType()) {
 				current_token->ch = ch;
-				current_token->print();
+				//current_token->print();
 				this->tokens.push_back(current_token);
 				current_token = nullptr;
 			}
@@ -103,7 +105,9 @@ namespace Metal
 	void
 	Metal::print_tokens ()
 	{
-		//
+		for (auto token : this->tokens) {
+			token->print();
+		}
 	}
 
 	#undef METAL_LEXER_LOG
