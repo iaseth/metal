@@ -17,6 +17,8 @@ namespace Metal
 			if (ch == '\n') {
 				line_number++;
 				column_number = 1;
+			} else if (ch == '\t') {
+				column_number += 4;
 			} else {
 				column_number++;
 			}
