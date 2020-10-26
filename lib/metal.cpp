@@ -71,6 +71,7 @@ namespace Metal
 			if (!current_token->isNoneType()) {
 				current_token->ch = ch;
 				current_token->print();
+				this->tokens.push_back(current_token);
 				current_token = nullptr;
 			}
 
@@ -87,7 +88,10 @@ namespace Metal
 
 	Metal::~Metal ()
 	{
-		//
+		for (auto token : this->tokens) {
+			delete token;
+		}
+		this->tokens.clear();
 	}
 
 	void

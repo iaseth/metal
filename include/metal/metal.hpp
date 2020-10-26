@@ -36,7 +36,7 @@ namespace Metal
 		private:
 			int number_of_tokens;
 			std::string text;
-			std::vector<Token> tokens;
+			std::vector<Token*> tokens;
 
 		public:
 			Metal (std::string text);
