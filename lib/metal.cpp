@@ -23,7 +23,7 @@ namespace Metal
 	void
 	Token::print ()
 	{
-		std::cout << "(" << this->line_number << ", " << this->column_number << ") ";
+		std::cout << "\t(" << this->line_number << ", " << this->column_number << ") ";
 
 		if (this->ch) {
 			std::cout << '\'' << this->ch << '\'' << '\n';
