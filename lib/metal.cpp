@@ -63,19 +63,17 @@ namespace Metal
 			current_token->line_number = line_number;
 			current_token->column_number = column_number;
 
-			switch (ch) {
-				case ' ':
-				case '\t':
-				case '\n':
-					//METAL_LEXER_LOG("its a space");
-					break;
-				default:
-					//METAL_LEXER_LOG("tts not a space");
-					while ((index + current_token_length) < text.size()
-						&& std::isalnum(text[index + current_token_length])) {
-						current_token_length++;
-					}
-					current_token->token_type = TokenType::METAL_IDENTIFIER;
+			if (std::isspace(ch)) {
+				//METAL_LEXER_LOG("its a space");
+			}
+			else if (std::isalnum(ch) || ch == '_') {
+				while ((index + current_token_length) < text.size()
+					&& std::isalnum(text[index + current_token_length])) {
+					current_token_length++;
+				}
+				current_token->token_type = TokenType::METAL_IDENTIFIER;
+			} else {
+				//
 			}
 
 			if (!current_token->isNoneType()) {
