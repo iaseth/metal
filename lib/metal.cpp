@@ -52,11 +52,13 @@ namespace Metal
 		char ch;
 
 		Token *current_token = nullptr;
+		int current_token_length = 1;
 
-		for (long unsigned index = 0; index < text.length(); ++index) {
+		for (long unsigned index = 0; index < text.length(); index += current_token_length) {
 			ch = text[index];
 			if (current_token == nullptr) {
 				current_token = new Token(TokenType::METAL_NONE);
+				current_token_length = 1;
 			}
 			current_token->line_number = line_number;
 			current_token->column_number = column_number;
@@ -67,11 +69,21 @@ namespace Metal
 					break;
 				default:
 					//METAL_LEXER_LOG("tts not a space");
+					while ((index + current_token_length) < text.size()
+						&& text[index + current_token_length] != ' ') {
+						current_token_length++;
+					}
 					current_token->token_type = TokenType::METAL_IDENTIFIER;
 			}
 
 			if (!current_token->isNoneType()) {
-				current_token->ch = ch;
+				if (current_token_length > 1) {
+					for (int i = 0; i < current_token_length; ++i) {
+						current_token->text += text[index+i];
+					}
+				} else {
+					current_token->ch = ch;
+				}
 				//current_token->print();
 				this->tokens.push_back(current_token);
 				current_token = nullptr;
@@ -83,7 +95,7 @@ namespace Metal
 			} else if (ch == '\t') {
 				column_number += 4;
 			} else {
-				column_number++;
+				column_number += current_token_length;
 			}
 		}
 	}
