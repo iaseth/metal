@@ -65,12 +65,14 @@ namespace Metal
 
 			switch (ch) {
 				case ' ':
+				case '\t':
+				case '\n':
 					//METAL_LEXER_LOG("its a space");
 					break;
 				default:
 					//METAL_LEXER_LOG("tts not a space");
 					while ((index + current_token_length) < text.size()
-						&& text[index + current_token_length] != ' ') {
+						&& std::isalnum(text[index + current_token_length])) {
 						current_token_length++;
 					}
 					current_token->token_type = TokenType::METAL_IDENTIFIER;
