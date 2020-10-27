@@ -7,15 +7,15 @@
 namespace Metal
 {
 	enum TokenType {
-		METAL_OPERATOR,
-		METAL_KEYWORD,
-		METAL_IDENTIFIER,
+		OPERATOR,
+		KEYWORD,
+		IDENTIFIER,
 
-		METAL_SPACE,
-		METAL_TAB,
-		METAL_LINE,
+		SPACE,
+		TAB,
+		LINE,
 
-		METAL_NONE
+		NONE
 	};
 
 	class Token

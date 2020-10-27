@@ -25,11 +25,11 @@ namespace Metal
 	{
 		std::cout << "\t(" << this->line_number << ", " << this->column_number << ") ";
 
-		if (this->token_type == TokenType::METAL_SPACE) {
+		if (this->token_type == TokenType::SPACE) {
 			std::cout << "(space) [" << this->count << "]\n";
-		} else if (this->token_type == TokenType::METAL_TAB) {
+		} else if (this->token_type == TokenType::TAB) {
 			std::cout << "(tab) [" << this->count << "]\n";
-		} else if (this->token_type == TokenType::METAL_LINE) {
+		} else if (this->token_type == TokenType::LINE) {
 			std::cout << "(line) [" << this->count << "]\n";
 		} else if (this->ch) {
 			std::cout << '\'' << this->ch << '\'' << '\n';
@@ -41,7 +41,7 @@ namespace Metal
 	bool
 	Token::isNoneType ()
 	{
-		if (this->token_type == TokenType::METAL_NONE) {
+		if (this->token_type == TokenType::NONE) {
 			return true;
 		}
 		return false;
@@ -63,7 +63,7 @@ namespace Metal
 		for (long unsigned index = 0; index < text.length(); index += current_token_length) {
 			ch = text[index];
 			if (current_token == nullptr) {
-				current_token = new Token(TokenType::METAL_NONE);
+				current_token = new Token(TokenType::NONE);
 				current_token->count = 1;
 				current_token_length = 1;
 			}
@@ -78,11 +78,11 @@ namespace Metal
 				}
 
 				if (ch == ' ') {
-					current_token->token_type = TokenType::METAL_SPACE;
+					current_token->token_type = TokenType::SPACE;
 				} else if (ch == '\t') {
-					current_token->token_type = TokenType::METAL_TAB;
+					current_token->token_type = TokenType::TAB;
 				} else if (ch == '\n') {
-					current_token->token_type = TokenType::METAL_LINE;
+					current_token->token_type = TokenType::LINE;
 				}
 				std::cout << "Number: " << current_token_length << std::endl;
 			}
@@ -91,7 +91,7 @@ namespace Metal
 					&& std::isalnum(text[index + current_token_length])) {
 					current_token_length++;
 				}
-				current_token->token_type = TokenType::METAL_IDENTIFIER;
+				current_token->token_type = TokenType::IDENTIFIER;
 			} else {
 				//
 			}
