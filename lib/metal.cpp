@@ -25,7 +25,13 @@ namespace Metal
 	{
 		std::cout << "\t(" << this->line_number << ", " << this->column_number << ") ";
 
-		if (this->ch) {
+		if (this->token_type == TokenType::METAL_SPACE) {
+			std::cout << "(space) [" << this->count << "]\n";
+		} else if (this->token_type == TokenType::METAL_TAB) {
+			std::cout << "(tab) [" << this->count << "]\n";
+		} else if (this->token_type == TokenType::METAL_LINE) {
+			std::cout << "(line) [" << this->count << "]\n";
+		} else if (this->ch) {
 			std::cout << '\'' << this->ch << '\'' << '\n';
 		} else {
 			std::cout << '"' << this->text << '"' << '\n';
@@ -58,6 +64,7 @@ namespace Metal
 			ch = text[index];
 			if (current_token == nullptr) {
 				current_token = new Token(TokenType::METAL_NONE);
+				current_token->count = 1;
 				current_token_length = 1;
 			}
 			current_token->line_number = line_number;
@@ -65,6 +72,19 @@ namespace Metal
 
 			if (std::isspace(ch)) {
 				//METAL_LEXER_LOG("its a space");
+				if (ch == ' ') {
+					current_token->token_type = TokenType::METAL_SPACE;
+				} else if (ch == '\t') {
+					current_token->token_type = TokenType::METAL_TAB;
+				} else if (ch == '\n') {
+					current_token->token_type = TokenType::METAL_LINE;
+				}
+
+				while (text[index + current_token_length] == ch) {
+					current_token->count++;
+					current_token_length++;
+				}
+				std::cout << "Number: " << current_token_length << std::endl;
 			}
 			else if (std::isalnum(ch) || ch == '_') {
 				while ((index + current_token_length) < text.size()

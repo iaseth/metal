@@ -11,6 +11,10 @@ namespace Metal
 		METAL_KEYWORD,
 		METAL_IDENTIFIER,
 
+		METAL_SPACE,
+		METAL_TAB,
+		METAL_LINE,
+
 		METAL_NONE
 	};
 
@@ -22,6 +26,7 @@ namespace Metal
 			std::string text;
 			int line_number;
 			int column_number;
+			int count;
 			friend class Metal;
 
 		public:
