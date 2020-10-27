@@ -72,17 +72,17 @@ namespace Metal
 
 			if (std::isspace(ch)) {
 				//METAL_LEXER_LOG("its a space");
+				while (text[index + current_token_length] == ch) {
+					current_token->count++;
+					current_token_length++;
+				}
+
 				if (ch == ' ') {
 					current_token->token_type = TokenType::METAL_SPACE;
 				} else if (ch == '\t') {
 					current_token->token_type = TokenType::METAL_TAB;
 				} else if (ch == '\n') {
 					current_token->token_type = TokenType::METAL_LINE;
-				}
-
-				while (text[index + current_token_length] == ch) {
-					current_token->count++;
-					current_token_length++;
 				}
 				std::cout << "Number: " << current_token_length << std::endl;
 			}
@@ -96,6 +96,15 @@ namespace Metal
 				//
 			}
 
+			if (ch == '\n') {
+				line_number += current_token->count;
+				column_number = 1;
+			} else if (ch == '\t') {
+				column_number += 4;
+			} else {
+				column_number += current_token_length;
+			}
+
 			if (!current_token->isNoneType()) {
 				if (current_token_length > 1) {
 					for (int i = 0; i < current_token_length; ++i) {
@@ -107,15 +116,6 @@ namespace Metal
 				//current_token->print();
 				this->tokens.push_back(current_token);
 				current_token = nullptr;
-			}
-
-			if (ch == '\n') {
-				line_number++;
-				column_number = 1;
-			} else if (ch == '\t') {
-				column_number += 4;
-			} else {
-				column_number += current_token_length;
 			}
 		}
 	}
