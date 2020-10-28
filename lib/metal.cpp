@@ -53,7 +53,8 @@ namespace Metal
 	void
 	Token::print ()
 	{
-		std::cout << "\t(" << this->line_number << ", " << this->column_number << ") ";
+		std::cout << "\t " << (this->index + 1)
+			<< ". (" << this->line_number << ", " << this->column_number << ") ";
 
 		if (this->token_type == TokenType::SPACE) {
 			std::cout << "(space) [" << this->count << "]\n";
@@ -94,6 +95,7 @@ namespace Metal
 			ch = text[index];
 			if (current_token == nullptr) {
 				current_token = new Token(TokenType::NONE);
+				current_token->index = this->tokens.size();
 				current_token->count = 1;
 				current_token_length = 1;
 			}
@@ -114,7 +116,6 @@ namespace Metal
 				} else if (ch == '\n') {
 					current_token->token_type = TokenType::LINE;
 				}
-				std::cout << "Number: " << current_token_length << std::endl;
 			}
 			else if (CharFuncs::is_identifier_initial(ch)) {
 				while ((index + current_token_length) < text.size()

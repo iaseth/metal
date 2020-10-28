@@ -30,6 +30,7 @@ namespace Metal
 	class Token
 	{
 		private:
+			int index;
 			TokenType token_type;
 			char ch;
 			std::string text;
