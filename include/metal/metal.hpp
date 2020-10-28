@@ -44,6 +44,7 @@ namespace Metal
 			~Token ();
 			void print ();
 			bool isNoneType ();
+			bool isSpaceType ();
 	};
 
 	class Metal

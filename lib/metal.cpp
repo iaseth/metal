@@ -5,7 +5,8 @@
 
 namespace Metal::CharFuncs
 {
-	bool is_identifier_initial (char ch)
+	bool
+	is_identifier_initial (char ch)
 	{
 		if (std::isalnum(ch) || ch == '_') {
 			return true;
@@ -13,7 +14,8 @@ namespace Metal::CharFuncs
 		return false;
 	}
 
-	bool is_identifier_middle (char ch)
+	bool
+	is_identifier_middle (char ch)
 	{
 		if (std::isalnum(ch) || std::isdigit(ch) || ch == '_') {
 			return true;
@@ -22,12 +24,14 @@ namespace Metal::CharFuncs
 	}
 
 
-	bool is_number_initial (char ch)
+	bool
+	is_number_initial (char ch)
 	{
 		return false;
 	}
 
-	bool is_number_middle (char ch)
+	bool
+	is_number_middle (char ch)
 	{
 		return false;
 	}
@@ -73,6 +77,17 @@ namespace Metal
 	Token::isNoneType ()
 	{
 		if (this->token_type == TokenType::NONE) {
+			return true;
+		}
+		return false;
+	}
+
+	bool
+	Token::isSpaceType ()
+	{
+		if (this->token_type == TokenType::SPACE
+			|| this->token_type == TokenType::TAB
+			|| this->token_type == TokenType::LINE) {
 			return true;
 		}
 		return false;
