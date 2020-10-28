@@ -18,6 +18,15 @@ namespace Metal
 		NONE
 	};
 
+	namespace CharFuncs
+	{
+		bool is_identifier_initial (char ch);
+		bool is_identifier_middle (char ch);
+
+		bool is_number_initial (char ch);
+		bool is_number_middle (char ch);
+	};
+
 	class Token
 	{
 		private:

@@ -3,6 +3,36 @@
 #include <iostream>
 #include <cctype>
 
+namespace Metal::CharFuncs
+{
+	bool is_identifier_initial (char ch)
+	{
+		if (std::isalnum(ch) || ch == '_') {
+			return true;
+		}
+		return false;
+	}
+
+	bool is_identifier_middle (char ch)
+	{
+		if (std::isalnum(ch) || std::isdigit(ch) || ch == '_') {
+			return true;
+		}
+		return false;
+	}
+
+
+	bool is_number_initial (char ch)
+	{
+		return false;
+	}
+
+	bool is_number_middle (char ch)
+	{
+		return false;
+	}
+};
+
 namespace Metal
 {
 	#define METAL_LEXER_LOG(x) std::cout \
@@ -86,9 +116,9 @@ namespace Metal
 				}
 				std::cout << "Number: " << current_token_length << std::endl;
 			}
-			else if (std::isalnum(ch) || ch == '_') {
+			else if (CharFuncs::is_identifier_initial(ch)) {
 				while ((index + current_token_length) < text.size()
-					&& std::isalnum(text[index + current_token_length])) {
+					&& CharFuncs::is_identifier_middle(text[index + current_token_length])) {
 					current_token_length++;
 				}
 				current_token->token_type = TokenType::IDENTIFIER;
