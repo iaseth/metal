@@ -35,6 +35,20 @@ namespace Metal::CharFuncs
 	{
 		return false;
 	}
+
+	bool
+	is_some_bracket (char ch)
+	{
+		std::string valid_chars = "(){}[]";
+		return false;
+	}
+
+	bool
+	is_some_operator (char ch)
+	{
+		std::string valid_chars = "";
+		return false;
+	}
 };
 
 namespace Metal
